@@ -1,0 +1,202 @@
+/* ========== SYSTEM 6 THEME (MIDI EDITION) ========== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+    --sys-black: #000;
+    --sys-white: #fff;
+    --sys-gray: #c0c0c0;
+}
+
+body {
+    background-color: #ddd;
+    background-image: radial-gradient(#aaa 15%, transparent 16%), radial-gradient(#aaa 15%, transparent 16%);
+    background-size: 4px 4px;
+    background-position: 0 0, 2px 2px;
+    color: var(--sys-black);
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--sys-white);
+    border: 2px solid var(--sys-black);
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.5);
+    padding: 4px;
+    max-width: 850px; /* Slightly narrower since no pedals */
+    width: 100%;
+}
+
+h2 {
+    background: repeating-linear-gradient(to right, var(--sys-black), var(--sys-black) 2px, var(--sys-white) 2px, var(--sys-white) 4px);
+    color: var(--sys-black);
+    background-clip: content-box;
+    border-bottom: 2px solid var(--sys-black);
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    background-color: var(--sys-white);
+}
+
+.synth-section {
+    background: var(--sys-white);
+    border: 1px solid var(--sys-black);
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 3px 3px 0px var(--sys-gray);
+}
+
+.synth-section h3 {
+    margin: -15px -15px 10px -15px;
+    background: var(--sys-black);
+    color: var(--sys-white);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.control-group {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+label { font-size: 1.2em; margin-bottom: 2px; }
+
+select, input[type="number"] {
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    background: var(--sys-white);
+    border: 1px solid var(--sys-black);
+    box-shadow: 2px 2px 0px var(--sys-black);
+    border-radius: 0;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+input[type=range] {
+    -webkit-appearance: none; width: 100%; background: transparent; margin: 10px 0;
+}
+input[type=range]:focus { outline: none; }
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%; height: 8px; cursor: pointer; background: var(--sys-white);
+    border: 1px solid var(--sys-black); box-shadow: 1px 1px 0px var(--sys-gray);
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 18px; width: 10px; border: 1px solid var(--sys-black);
+    background: var(--sys-white); cursor: pointer; -webkit-appearance: none;
+    margin-top: -6px; box-shadow: 2px 2px 0px var(--sys-black);
+}
+
+button {
+    background-color: var(--sys-white);
+    border: 1px solid var(--sys-black);
+    box-shadow: 3px 3px 0px var(--sys-black);
+    color: var(--sys-black);
+    padding: 10px 20px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+    border-radius: 0;
+}
+button:active, button.active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--sys-black);
+    background-color: var(--sys-black);
+    color: var(--sys-white);
+}
+
+/* Specific Buttons */
+#play-btn { border: 2px solid var(--sys-black); }
+.toggle-btn.active { background-color: var(--sys-black); color: var(--sys-white); }
+
+/* Keyboard */
+.keyboard-area {
+    width: 100%; box-sizing: border-box;
+    display: flex; flex-direction: column; alignItems: center;
+    margin-top: 20px; padding: 10px;
+    background: var(--sys-white);
+    border: 1px solid var(--sys-black);
+    box-shadow: 3px 3px 0px var(--sys-gray);
+}
+.piano-keys {
+    display: flex; justify-content: center; position: relative;
+    height: 160px; margin-top: 10px;
+}
+.key {
+    border: 1px solid var(--sys-black); box-sizing: border-box;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    align-items: center; padding-bottom: 10px; cursor: pointer;
+    user-select: none; font-size: 0.8em; box-shadow: 2px 2px 0px var(--sys-gray);
+}
+.key.white { width: 40px; height: 100%; background: var(--sys-white); z-index: 1; }
+.key.white.active { background: var(--sys-gray); box-shadow: inset 2px 2px 0px var(--sys-black); }
+.key.black {
+    width: 28px; height: 60%; background: var(--sys-black); color: var(--sys-white);
+    margin-left: -14px; margin-right: -14px; z-index: 2;
+}
+.key.black.active { background: #333; border-bottom: 4px solid var(--sys-black); }
+
+/* Sequencer */
+.sequencer-container {
+    margin-top: 20px; overflow-x: auto; padding: 10px;
+    background: var(--sys-white); border: 1px solid var(--sys-black);
+    box-shadow: 3px 3px 0px var(--sys-gray);
+}
+.sequencer-grid {
+    display: grid; grid-template-columns: 60px repeat(16, 1fr);
+    gap: 2px; min-width: 800px;
+}
+.note-label {
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 10px; font-weight: bold; font-size: 0.9em;
+}
+.step {
+    aspect-ratio: 1; background-color: var(--sys-white);
+    border: 1px solid var(--sys-gray); cursor: pointer;
+}
+.step.on { background-color: var(--sys-black); border-color: var(--sys-black); }
+.step.current { border: 2px solid var(--sys-black); }
+
+/* Transport */
+.transport-controls {
+    display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+    flex-wrap: wrap; align-items: flex-end;
+}
+
+/* Song Chain */
+#pattern-display {
+    min-height: 40px; border: 1px solid var(--sys-black);
+    background-color: var(--sys-white); color: var(--sys-black);
+    padding: 10px; text-align: left; box-shadow: inset 2px 2px 0px var(--sys-gray);
+}
+.pattern-tile {
+    display: inline-block; border: 1px solid var(--sys-black);
+    background: var(--sys-white); padding: 5px 10px; margin: 2px;
+    cursor: pointer; box-shadow: 2px 2px 0px var(--sys-gray);
+    position: relative;
+}
+.pattern-tile:hover { background: var(--sys-black); color: var(--sys-white); }
+.pattern-tile.playing {
+    background: var(--sys-black); color: var(--sys-white);
+    border: 1px dotted var(--sys-white);
+}
+.delete-btn {
+    position: absolute; top: -5px; right: -5px;
+    background: var(--sys-white); color: var(--sys-black);
+    border: 1px solid var(--sys-black); border-radius: 50%;
+    width: 15px; height: 15px; font-size: 10px; line-height: 1;
+    padding: 0; visibility: hidden;
+}
+.pattern-tile:hover .delete-btn { visibility: visible; }

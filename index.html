@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web MIDI Sequencer (System 6)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Web MIDI Sequencer</h2>
+        
+        <!-- MIDI SETUP -->
+        <div class="synth-section" id="midi-setup">
+            <h3>MIDI Configuration</h3>
+            <div class="control-group" style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
+                <label for="midi-output-selector" style="margin: 0;">Output Device:</label>
+                <select id="midi-output-selector" style="min-width: 200px;">
+                    <option value="">Searching...</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ARPEGGIATOR -->
+        <div class="synth-section" id="arp-section">
+            <h3>Arpeggiator</h3>
+            <div id="arp-controls" style="display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap;">
+                <div class="control-group" style="flex: 1;">
+                    <label for="arp-mode">Mode</label>
+                    <select id="arp-mode">
+                        <option value="off">Off</option>
+                        <option value="up">Up</option>
+                        <option value="down">Down</option>
+                        <option value="updown">Up/Down</option>
+                        <option value="random">Random</option>
+                    </select>
+                </div>
+                <div class="control-group" style="flex: 1;">
+                    <label for="arp-rate">Rate</label>
+                    <select id="arp-rate">
+                        <option value="1">1/16</option>
+                        <option value="2">1/32</option>
+                        <option value="4">1/64</option>
+                    </select>
+                </div>
+                <div class="control-group" style="flex: 1;">
+                    <label for="arp-chords">Intervals</label>
+                    <select id="arp-chords">
+                        <option value="held_notes">Held Notes</option>
+                        <option value="major_triad">Major Triad</option>
+                        <option value="minor_triad">Minor Triad</option>
+                        <option value="seventh_chord">7th Chord</option>
+                        <option value="fifth_chord">Power 5th</option>
+                    </select>
+                </div>
+                <div class="control-group" style="flex: 1;">
+                    <label for="arp-octaves">Range</label>
+                    <select id="arp-octaves">
+                        <option value="1">1 Oct</option>
+                        <option value="2" selected>2 Oct</option>
+                        <option value="3">3 Oct</option>
+                        <option value="4">4 Oct</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- KEYBOARD -->
+        <div class="keyboard-area">
+            <div class="keyboard-controls">
+                <label for="octave-selector">Base Octave:</label>
+                <select id="octave-selector">
+                    <option value="36">C2</option>
+                    <option value="48">C3</option>
+                    <option value="60" selected>C4</option>
+                    <option value="72">C5</option>
+                    <option value="84">C6</option>
+                </select>
+            </div>
+            <div id="piano-keys" class="piano-keys"></div>
+        </div>
+        
+        <!-- SEQUENCER SCALE -->
+        <div class="synth-section" id="scale-setup" style="text-align: center; margin-top: 20px;">
+            <h3 style="margin-bottom: 0;">Sequencer Scale</h3>
+            <div class="control-group" style="max-width: 300px; margin: 10px auto 0 auto;">
+                <label for="scale-selector">Select Scale</label>
+                <select id="scale-selector"></select>
+            </div>
+        </div>
+
+        <!-- SEQUENCER GRID -->
+        <div class="sequencer-container">
+            <h3 id="sequencer-title">16-Step Sequencer</h3>
+            <div id="sequencer-grid" class="sequencer-grid"></div>
+        </div>
+
+        <!-- TRANSPORT -->
+        <div class="transport-controls">
+            <div class="group">
+                <label for="bpm-input">BPM</label>
+                <input type="number" id="bpm-input" min="40" max="300" value="120" style="width:60px;">
+            </div>
+            <button id="play-btn">PLAY</button>
+            <button id="stop-btn">STOP</button>
+            <button id="clear-btn">Clear</button>
+            <button id="tie-btn" class="toggle-btn">TIE: OFF</button>
+            
+            <div class="group" style="margin-left: auto; border: 1px dashed #555; padding: 5px 10px; border-radius: 6px;">
+                <label for="random-amount">Rand: <span id="random-amount-val">20</span></label>
+                <input type="range" id="random-amount" min="12" max="40" value="20" style="width: 80px;">
+                <button id="randomize-btn">GO</button>
+            </div>
+        </div>
+        
+        <!-- SONG CHAIN -->
+        <div class="synth-section" id="song-section" style="margin-top: 20px;">
+            <h3>Song Chain</h3>
+            <div id="song-controls" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+                <button id="save-pattern-btn">SAVE PATTERN A</button>
+                <button id="play-song-btn">PLAY SONG</button>
+            </div>
+            <div id="pattern-display">
+                <p>Saved Patterns: None</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
