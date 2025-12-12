@@ -172,6 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Song
     document.getElementById('save-pattern-btn').onclick = savePattern;
     document.getElementById('play-song-btn').onclick = startStopSong;
+    
+    // --- NEW LISTENER FOR LOOP BUTTON ---
+    document.getElementById('loop-song-btn').onclick = (e) => {
+        state.isSongLooping = !state.isSongLooping;
+        e.target.classList.toggle('active', state.isSongLooping);
+        e.target.textContent = state.isSongLooping ? 'LOOP: ON' : 'LOOP: OFF';
+    };
+    // --- END NEW LISTENER ---
+
     document.getElementById('pattern-display').addEventListener('click', e => {
         const tile = e.target.closest('.pattern-tile');
         if (!tile) return;
