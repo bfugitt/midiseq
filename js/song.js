@@ -57,16 +57,8 @@ export function loadPattern(index) {
     document.getElementById('arp-chords').value = pattern.settings.arp_chords;
     document.getElementById('arp-octaves').value = pattern.settings.arp_octaves;
 
-    // Refresh Grid and Scale
-    // We can trigger the scale change listener logic manually or call a shared function
-    // But since main.js has logic, let's trust the state update for now.
-    // Ideally main.js should expose a "loadSettings" function.
-    // For now, let's just trigger the grid redraw.
+    // Refresh Grid
     createGrid();
-    
-    // Note: The Scale Title won't update until we call loadScale(), 
-    // but we can't import loadScale here easily without circ dependency.
-    // The visual title might lag slightly until next interaction.
 }
 
 export function deletePattern(index) {
@@ -99,10 +91,23 @@ export function deletePattern(index) {
 }
 
 export function advanceSongPattern() {
+    // Check if we are at the end of the song
     if (state.currentPatternIndex >= state.songPatterns.length - 1) {
-        stopSong();
-        return;
+        // --- LOOP LOGIC ---
+        if (state.isSongLooping) {
+            // Loop back to start
+            state.currentPatternIndex = 0;
+            state.nextPatternToLoad = state.songPatterns[0];
+            updatePatternDisplay();
+            return;
+        } else {
+            // Stop
+            stopSong();
+            return;
+        }
+        // --- END LOOP LOGIC ---
     }
+    
     state.currentPatternIndex++;
     state.nextPatternToLoad = state.songPatterns[state.currentPatternIndex]; 
     updatePatternDisplay();
