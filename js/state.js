@@ -26,6 +26,7 @@ export const state = {
     // Song Mode
     songPatterns: [],
     isSongPlaying: false,
+    isSongLooping: false, // <-- NEW: Track loop state
     currentPatternIndex: 0,
     nextPatternToLoad: null
 };
